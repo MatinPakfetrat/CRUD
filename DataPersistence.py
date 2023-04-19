@@ -1,0 +1,1 @@
+"""This module persists all data into an appropriate text file."""

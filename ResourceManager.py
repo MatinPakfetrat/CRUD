@@ -1,0 +1,1 @@
+"""This module creates and manipulates instances of the resource class."""
