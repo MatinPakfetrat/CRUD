@@ -51,12 +51,18 @@ class UserInteractivity:
                     except ValueError:
                         print("Invalid input! Try again.")    
             elif choice == "4":
-                self.ResourceManager.delete_resource()
+                while True:
+                    try:
+                        id = int(input("Please enter the ID of the resource: "))            
+                        self.ResourceManager.delete_resource(id)
+                        break
+                    except ValueError:
+                        print("Invalid input! Try again.")   
             elif choice == "5":
                 # Save the resource data to the file before exiting the program
                 self.DataPersistence.save_data()
                 break
             else:
                 print("Invalid choice. Please try again.")
-u = UserInteractivity()
-u.run()
+ui = UserInteractivity()
+ui.run()

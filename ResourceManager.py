@@ -8,6 +8,10 @@ class ResourceManager:
         self.resources = [Resource(1, "ahsdgi", "agolsjfd", 310635)]
 
     def create_resource(self, id, name, author, date):
+        for resource in self.resources:
+            if resource.id == id:
+                print("A resource with this ID already exists! Try again.")
+                return
         self.resources.append(Resource(id, name, author, date))
         print("Resource created successfully!")
     
@@ -37,3 +41,11 @@ class ResourceManager:
                 self.resources[i] = Resource(id, new_name, new_author, new_date)
                 return "Resource information updated successfully!"        
         print("No resources found! Try again.")    
+
+    def delete_resource(self, id):
+        for i in range(0, len(self.resources)):
+            if self.resources[i].id == id:
+                del(self.resources[i])
+                print("Resource deleted successfully!")
+                return
+        print("No resources found!")        
