@@ -6,12 +6,13 @@ from DataPersistence import DataPersistence
 class UserInteractivity:
 
     ResourceManager = ResourceManager()
+    DataPersistence = DataPersistence()
     
     def display_menu(self):
 
         print("\nMenu:")
         print("1. Create resource")
-        print("2. Read resource")
+        print("2. Search resources")
         print("3. Edit resource")
         print("4. Delete resource")
         print("5. Exit")
@@ -33,14 +34,21 @@ class UserInteractivity:
                     except ValueError:
                         print("Invalid input! Try again.")    
             elif choice == "2":
-                ResourceManager.read_resource()
+                while True:
+                    try:
+                        id = int(input("Please enter the id of the resource: "))
+                        name = input("Please enter the name of the resource: ")    
+                        print(self.ResourceManager.search_resource(id, name))
+                        break
+                    except ValueError:
+                        print("Invalid input! Try again.")    
             elif choice == "3":
-                ResourceManager.edit_resource()
+                self.ResourceManager.edit_resource()
             elif choice == "4":
-                ResourceManager.delete_resource()
+                self.ResourceManager.delete_resource()
             elif choice == "5":
                 # Save the resource data to the file before exiting the program
-                DataPersistence.save_data()
+                self.DataPersistence.save_data()
                 break
             else:
                 print("Invalid choice. Please try again.")
