@@ -5,11 +5,11 @@ from Resource import Resource
 class ResourceManager:
     
     def __init__(self):
-        self.resources = []
+        self.resources = [Resource(1, "ahsdgi", "agolsjfd", 310635)]
 
     def create_resource(self, id, name, author, date):
         self.resources.append(Resource(id, name, author, date))
-        return "Resource created successfully!"
+        print("Resource created successfully!")
     
     def search_resource(self, id, name):
         found = []
@@ -17,7 +17,23 @@ class ResourceManager:
             if resource.id == id and resource.name == name:
                 found.append(resource)
         if found:
-            return "Found resource(s):", print(r for r in found)         
+            print("Found resource(s):")  
+            for r in found:
+                r.display()    
         else:
-            return "No resources found."
-    
+            print("No resources found! Try again.")
+
+    def edit_resource(self, id):
+        for i in range(0, len(self.resources)):
+            if self.resources[i].id == id:
+                while True:
+                    try:            
+                        new_name = input("Please enter the updated name of the resource: ")
+                        new_author = input("Please enter the updated name of the author of the resource: ")
+                        new_date = int(input("Please enter the updated publication year of the resource: "))
+                        break
+                    except ValueError:
+                        print("Invalid input! Try again.")
+                self.resources[i] = Resource(id, new_name, new_author, new_date)
+                return "Resource information updated successfully!"        
+        print("No resources found! Try again.")    

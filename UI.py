@@ -29,21 +29,27 @@ class UserInteractivity:
                         name = input("Please enter the name of the resource: ")
                         author = input("Please enter the name of the author of the resource: ")
                         date = int(input("Please enter the publication year of the resource: "))
-                        print(self.ResourceManager.create_resource(id, name, author, date))
+                        self.ResourceManager.create_resource(id, name, author, date)
                         break
                     except ValueError:
                         print("Invalid input! Try again.")    
             elif choice == "2":
                 while True:
                     try:
-                        id = int(input("Please enter the id of the resource: "))
+                        id = int(input("Please enter the ID of the resource: "))
                         name = input("Please enter the name of the resource: ")    
-                        print(self.ResourceManager.search_resource(id, name))
+                        self.ResourceManager.search_resource(id, name)
                         break
                     except ValueError:
                         print("Invalid input! Try again.")    
             elif choice == "3":
-                self.ResourceManager.edit_resource()
+                while True:
+                    try:
+                        id = int(input("Please enter the ID of the resource: "))
+                        print(self.ResourceManager.edit_resource(id))
+                        break
+                    except ValueError:
+                        print("Invalid input! Try again.")    
             elif choice == "4":
                 self.ResourceManager.delete_resource()
             elif choice == "5":
@@ -52,3 +58,5 @@ class UserInteractivity:
                 break
             else:
                 print("Invalid choice. Please try again.")
+u = UserInteractivity()
+u.run()

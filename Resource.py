@@ -8,8 +8,8 @@ class Resource:
         self.author = author
         self.date = date
 
-    def __str__(self):
-        return f"Name: {self.name}, author: {self.author}, date: {self.date}"
+    def display(self):
+        print(f"ID: {self.id}, name: {self.name}, author: {self.author}, date: {self.date}")
 
     def get_attributes(self):
         return [self.id, self.name, self.author, self.date]
