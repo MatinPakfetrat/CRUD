@@ -4,6 +4,8 @@ from ResourceManager import ResourceManager
 from DataPersistence import DataPersistence
 
 class UserInteractivity:
+
+    ResourceManager = ResourceManager()
     
     def display_menu(self):
 
@@ -20,7 +22,16 @@ class UserInteractivity:
         while True:
             choice = self.display_menu()
             if choice == "1":
-                ResourceManager.create_resource()
+                while True:    
+                    try:
+                        id = int(input("Please enter the ID of the resource: "))
+                        name = input("Please enter the name of the resource: ")
+                        author = input("Please enter the name of the author of the resource: ")
+                        date = int(input("Please enter the publication year of the resource: "))
+                        print(self.ResourceManager.create_resource(id, name, author, date))
+                        break
+                    except ValueError:
+                        print("Invalid input! Try again.")    
             elif choice == "2":
                 ResourceManager.read_resource()
             elif choice == "3":
@@ -33,4 +44,3 @@ class UserInteractivity:
                 break
             else:
                 print("Invalid choice. Please try again.")
-                
