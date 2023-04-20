@@ -3,49 +3,58 @@
 from Resource import Resource
 
 class ResourceManager:
-    
+
     def __init__(self):
-        self.resources = [Resource(1, "ahsdgi", "agolsjfd", 310635)]
+        self.resources = []
 
     def create_resource(self, id, name, author, date):
+        """Creates a book."""
         for resource in self.resources:
-            if resource.id == id:
-                print("A resource with this ID already exists! Try again.")
+            if int(resource.get_id()) == id:
+                print("A book with this ID already exists! Try again.")
                 return
         self.resources.append(Resource(id, name, author, date))
-        print("Resource created successfully!")
+        return True
     
     def search_resource(self, id, name):
-        found = []
+        """Searches for a book."""
+        flag = False
         for resource in self.resources:
-            if resource.id == id and resource.name == name:
-                found.append(resource)
-        if found:
-            print("Found resource(s):")  
-            for r in found:
-                r.display()    
+            if int(resource.get_id()) == id and str(resource.get_name()) == name:
+                flag = True
+                break
+        if flag:        
+            print("Found book:", end=' ')
+            resource.display()     
         else:
-            print("No resources found! Try again.")
+            print("No book found!")
 
     def edit_resource(self, id):
+        """Edits a book if found."""
         for i in range(0, len(self.resources)):
-            if self.resources[i].id == id:
+            if int(self.resources[i].get_id()) == id:
                 while True:
                     try:            
-                        new_name = input("Please enter the updated name of the resource: ")
-                        new_author = input("Please enter the updated name of the author of the resource: ")
-                        new_date = int(input("Please enter the updated publication year of the resource: "))
+                        new_name = input("Please enter the updated name of the book: ").capitalize()
+                        new_author = input("Please enter the updated name of the author of the book: ").capitalize()
+                        new_date = int(input("Please enter the updated publication year of the book: "))
                         break
                     except ValueError:
                         print("Invalid input! Try again.")
                 self.resources[i] = Resource(id, new_name, new_author, new_date)
-                return "Resource information updated successfully!"        
-        print("No resources found! Try again.")    
+                print("Book's information updated successfully!")
+                return        
+        print("No book found! Try again.")    
 
     def delete_resource(self, id):
+        """Deletes a book if found."""
         for i in range(0, len(self.resources)):
-            if self.resources[i].id == id:
+            if int(self.resources[i].get_id()) == id:
                 del(self.resources[i])
-                print("Resource deleted successfully!")
+                print("Book deleted successfully!")
                 return
-        print("No resources found!")        
+        print("No book found!")        
+
+    def get_all_resources(self):
+        return self.resources
+    
